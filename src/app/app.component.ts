@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { ProductListItemComponent } from './product-list-item/product-list-item.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { LayoutModule } from './layout/layout.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductListItemComponent, ToolbarComponent],
+  imports: [ProductListItemComponent, LayoutModule, MatSidenavModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
