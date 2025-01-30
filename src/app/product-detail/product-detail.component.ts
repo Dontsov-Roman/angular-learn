@@ -15,6 +15,6 @@ export class ProductDetailComponent {
   @Input() item!: Product;
   route: ActivatedRoute = inject(ActivatedRoute);
   constructor(private service: ProductsService) {
-    this.service.getById(Number(this.route.snapshot.params['id'])).then(item => this.item = item);
+    this.service.getById(Number(this.route.snapshot.params['id'])).subscribe(item => this.item = item);
   }
 }

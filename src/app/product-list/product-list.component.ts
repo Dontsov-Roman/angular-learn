@@ -16,6 +16,6 @@ export class ProductListComponent {
   list: ListType<Product> = { data: [], pagination: { total: 0 } };
 
   constructor(private service: ProductsService) {
-    this.service.getList().then(list => this.list = list);
+    this.service.getList().subscribe(list => this.list = list);
   }
 }

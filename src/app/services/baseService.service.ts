@@ -1,31 +1,31 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { ID, BaseService as IBaseService, ListType } from "./base-service"
+import { ID, BaseService as IBaseService } from "./base-service"
 import { Pagination } from "./pagination";
+import { map, Observable } from "rxjs";
 
 @Injectable()
 export class BaseService<ItemType extends ID> implements IBaseService<ItemType> {
     protected baseUrl = '';
     constructor(private http: HttpClient) { }
 
-    async getById(id: number): Promise<ItemType> {
-        const item = await this.http.get<ItemType>(`${this.baseUrl}/${id}`);
-        return (await fetch(`${this.baseUrl}/${id}`, )).json();
+    getById(id: number): Observable<ItemType> {
+        return this.http.get<ItemType>(`${this.baseUrl}/${id}`);
     }
-    async getList(pagination?: Partial<Pagination>): Promise<ListType<ItemType>> {
-        const data = await (await fetch(this.baseUrl)).json() as unknown as ItemType[];
-        return { data, pagination: { ...pagination, total: data.length } };
+    getList(pagination?: Partial<Pagination>) {
+        return this.http.get<ItemType[]>(this.baseUrl, { params: pagination })
+            .pipe(map((data) => ({ data, pagination: { ...pagination, total: data.length } })));
     }
-    async create(item: Partial<ItemType>): Promise<ItemType> {
-        return (await fetch(this.baseUrl, { method: 'POST', body: JSON.stringify(item) })).json();
-    }
-    
-    async update(item: Partial<ItemType>): Promise<ItemType> {
-        return (await fetch(`${this.baseUrl}/${item.id}`, { method: 'PUT', body: JSON.stringify(item) })).json();
+    create(item: Partial<ItemType>) {
+        return this.http.post<ItemType>(this.baseUrl, item);
     }
     
-    async deleteById(id: number): Promise<boolean> {
-        return (await fetch(`${this.baseUrl}/${id}`, { method: 'DELETE' })).ok;
+    update(item: Partial<ItemType> & ID) {
+        return this.http.put<ItemType>(`${this.baseUrl}/${item.id}`, item);
+    }
+    
+    deleteById(id: number) {
+        return this.http.delete<boolean>(`${this.baseUrl}/${id}`);
     }
 }

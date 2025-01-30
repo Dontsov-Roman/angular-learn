@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import { Pagination, PaginationMeta } from "./pagination";
 
 export type ID = {
@@ -8,9 +9,9 @@ export type ListType<Item extends ID> = {
     pagination: PaginationMeta;
 } 
 export interface BaseService<Item extends ID> {
-    getById(id: number): Promise<Item>;
-    getList(pagination?: Partial<Pagination>): Promise<ListType<Item>>;
-    update(item: Partial<Item> & ID): Promise<Item>;
-    create(item: Partial<Item>): Promise<Item>;
-    deleteById(id: number): Promise<boolean>;
+    getById(id: number): Observable<Item>;
+    getList(pagination?: Partial<Pagination>): Observable<ListType<Item>>;
+    update(item: Partial<Item> & ID): Observable<Item>;
+    create(item: Partial<Item>): Observable<Item>;
+    deleteById(id: number): Observable<boolean>;
 }
