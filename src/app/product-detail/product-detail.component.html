@@ -1,14 +1,14 @@
-<div class="product">
-    <img class="product-image" [src]="item?.image" [alt]="item?.description" />
+<div *ngIf="item" class="product">
+    <img class="product-image" [src]="item.image" [alt]="item.description" />
     <section class="product-title">
         <div>
-            <span>{{ item?.title }}</span>
+            <span>{{ item.title }}</span>
             <p>
-                <i>{{ item?.category }}</i>
+                <i>{{ item.category }}</i>
             </p>
         </div>
-        <p><b>{{ item?.price | currency }}</b></p>
-        <p>{{ item?.description }}</p>
+        <p><b>{{ item.price | currency }}</b></p>
+        <p>{{ item.description }}</p>
     </section>
-    <a [routerLink]="['']">Back</a>
+    <a mat-flat-button [routerLink]="['']">Back</a>
 </div>

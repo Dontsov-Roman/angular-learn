@@ -1,9 +1,9 @@
 <div class="product">
-    <a [routerLink]="['products', item.id]">
-        <img class="product-image" [src]="item.image" alt="{{ item.description }}"/>
-        <section class="product-title">
+    <mat-card [routerLink]="['products', item.id]">
+        <img mat-card-image class="product-image" [src]="item.image" alt="{{ item.description }}"/>
+        <mat-card-content class="product-title">
             <span>{{ item.title }}</span>
             <p>{{ item.price | currency }}</p>
-        </section>
-    </a>
+        </mat-card-content>
+    </mat-card>
 </div>
