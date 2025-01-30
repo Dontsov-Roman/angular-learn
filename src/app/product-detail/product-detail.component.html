@@ -1,0 +1,14 @@
+<div class="product">
+    <img class="product-image" [src]="item?.image" [alt]="item?.description" />
+    <section class="product-title">
+        <div>
+            <span>{{ item?.title }}</span>
+            <p>
+                <i>{{ item?.category }}</i>
+            </p>
+        </div>
+        <p><b>{{ item?.price | currency }}</b></p>
+        <p>{{ item?.description }}</p>
+    </section>
+    <a [routerLink]="['']">Back</a>
+</div>

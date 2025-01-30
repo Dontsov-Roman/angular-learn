@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { Product, ProductsService } from '../services/products.service';
 import { ListType } from '../services/base-service';
 import { ProductListItemComponent } from '../product-list-item/product-list-item.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
@@ -15,6 +16,6 @@ export class ProductListComponent {
   list: ListType<Product> = { data: [], pagination: { total: 0 } };
 
   constructor(private service: ProductsService) {
-    this.service.getList().then(list => { this.list = list; console.log(this.list)});
+    this.service.getList().then(list => this.list = list);
   }
 }

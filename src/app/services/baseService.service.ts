@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@angular/core";
-import { ID, BaseService as IBaseService, ListType } from "./base-service"
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Pagination, PaginationMeta } from "./pagination";
+
+import { ID, BaseService as IBaseService, ListType } from "./base-service"
+import { Pagination } from "./pagination";
 
 @Injectable()
 export class BaseService<ItemType extends ID> implements IBaseService<ItemType> {
@@ -10,6 +10,7 @@ export class BaseService<ItemType extends ID> implements IBaseService<ItemType> 
     constructor(private http: HttpClient) { }
 
     async getById(id: number): Promise<ItemType> {
+        const item = await this.http.get<ItemType>(`${this.baseUrl}/${id}`);
         return (await fetch(`${this.baseUrl}/${id}`, )).json();
     }
     async getList(pagination?: Partial<Pagination>): Promise<ListType<ItemType>> {
