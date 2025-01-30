@@ -1,1 +1,7 @@
-<p>product-list works!</p>
+
+<section class="product-list">
+    <app-product-list-item
+        *ngFor="let item of list.data"
+        [item]="item"
+    ></app-product-list-item>
+</section>
