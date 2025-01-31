@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 
 import { SideNavService } from '../side-nav/side-nav.service';
 import { AuthService } from '../../services/auth.service';

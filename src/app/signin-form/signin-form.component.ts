@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DialogRef } from '@angular/cdk/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,23 +9,32 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { User } from './user.type';
 
+/*
+    username: mor_2314
+    password: 83r5^_
+*/
 @Component({
   selector: 'app-signin-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, MatInputModule],
+  imports: [CommonModule, ReactiveFormsModule, MatButtonModule, MatCardModule, MatInputModule],
   templateUrl: './signin-form.component.html',
   styleUrl: './signin-form.component.scss'
 })
 export class SigninFormComponent {
-  user: User = {
-    name: '',
-    password: '',
-  };
-  dialog = inject(Dialog);
+  user = new FormBuilder().nonNullable.group({
+    name: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
+  })
   
-  constructor(private authService: AuthService, private dialogRef: DialogRef) { }
-  signin() {
-    console.log(this.user);
+  constructor(private authService: AuthService, private dialogRef: DialogRef) {}
+  async submit() {
+    const { valid, value: { name, password } } = this.user;
+    if (valid && name && password) {
+      await this.authService.login(name, password);
+      console.log(this.authService.isAuthenticated(), this.authService.getAuthToken()); 
+      if (this.authService.isAuthenticated())
+        this.close();
+    }
   }
   close() {
     this.dialogRef.close();
