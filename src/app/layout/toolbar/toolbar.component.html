@@ -1,11 +1,13 @@
-<section>
-    <mat-toolbar class="toolbar">
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span class="spacer"></span>
         <div>Angular Application</div>
+        <span class="spacer"></span>
         <button mat-icon-button *ngIf="isAuthenticated" (click)="toggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <button mat-icon-button *ngIf="!isAuthenticated" (click)="openSigninModal()">
             <mat-icon>login</mat-icon>
         </button>
-    </mat-toolbar>
-</section>
+    </mat-toolbar-row>
+</mat-toolbar>
