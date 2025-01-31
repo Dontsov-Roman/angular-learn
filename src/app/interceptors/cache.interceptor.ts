@@ -11,7 +11,7 @@ export class CacheInterceptor implements HttpInterceptor {
   constructor(private cacheService: CacheRequestService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if ( req.method !== 'GET' || req.context.has(SKIP_CACHING)) {
+    if (req.method !== 'GET' || req.context.has(SKIP_CACHING)) {
       return next.handle(req);
     }
     let cached = this.cacheService.getItem(req);

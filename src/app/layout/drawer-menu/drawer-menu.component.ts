@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { SideNavService } from '../side-nav/side-nav.service';
 
 @Component({
   selector: 'app-drawer-menu',
@@ -7,10 +8,11 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './drawer-menu.component.scss'
 })
 export class DrawerMenuComponent {
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private sideNavService: SideNavService) {
     
   }
   async logout() { 
     await this.authService.logout();
+    this.sideNavService.close();
   }
 }
