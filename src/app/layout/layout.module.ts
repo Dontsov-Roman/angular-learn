@@ -11,9 +11,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { SideNavService } from './side-nav/side-nav.service';
 import { SigninFormComponent } from '../signin-form/signin-form.component';
+import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, SideNavComponent],
+  declarations: [ToolbarComponent, SideNavComponent, DrawerMenuComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -23,11 +24,12 @@ import { SigninFormComponent } from '../signin-form/signin-form.component';
     DialogModule,
     FormsModule,
   ],
-  exports: [ToolbarComponent, SideNavComponent],
+  exports: [ToolbarComponent, SideNavComponent, DrawerMenuComponent],
   providers: [
     SideNavService,
     Dialog,
     SigninFormComponent,
+    DrawerMenuComponent,
   ]
 })
 export class LayoutModule { }
