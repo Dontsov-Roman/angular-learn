@@ -13,17 +13,10 @@ type CachedType = Observable<HttpEvent<any>>;
   providedIn: 'root'
 })
 export class CacheRequestService implements ICacheService<CachedType> {
-  protected cached = new Map<string, CachedType>();
-  protected cachedTime = new Map<string, number>();
-  protected ttl = 5000;
+  private cached = new Map<string, CachedType>();
+  private cachedTime = new Map<string, number>();
+  private ttl = 5000;
   constructor() { }
-  private getKeyByRequest(req: HttpRequest<any>): string {
-    return `${req.url}:${req.params.toString()}`;
-  }
-  private checkTime(key: string): boolean {
-    const time = this.cachedTime.get(key);
-    return Boolean(time && Date.now() < time + this.ttl);
-  }
   getItem(req: HttpRequest<any>): CachedType | undefined {
     const key = this.getKeyByRequest(req);
     if (this.checkTime(key))
@@ -35,5 +28,12 @@ export class CacheRequestService implements ICacheService<CachedType> {
     this.cachedTime.set(key, Date.now());
     this.cached.set(key, response);
     return response
+  }
+  private getKeyByRequest(req: HttpRequest<any>): string {
+    return `${req.url}:${req.params.toString()}`;
+  }
+  private checkTime(key: string): boolean {
+    const time = this.cachedTime.get(key);
+    return Boolean(time && Date.now() < time + this.ttl);
   }
 }

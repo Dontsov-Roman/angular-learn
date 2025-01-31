@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-
-import { CacheRequestService } from '../services/cache-request.service';
+import { HttpContextToken, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter, first, shareReplay } from 'rxjs';
 
+import { CacheRequestService } from '../services/cache-request.service';
+
+export const SKIP_CACHING = new HttpContextToken(() => false);
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
 
   constructor(private cacheService: CacheRequestService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if ( req.method !== 'GET') {
+    if ( req.method !== 'GET' || req.context.has(SKIP_CACHING)) {
       return next.handle(req);
     }
     let cached = this.cacheService.getItem(req);
