@@ -1,9 +1,9 @@
 
 <mat-drawer-container>
     <mat-drawer #sidenav [opened]="opened" position="end" mode="over">
-        <p>Drawer Content</p>
+        <ng-content select="[drawer]" />
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet />
+        <ng-content />
     </mat-drawer-content>
 </mat-drawer-container>
