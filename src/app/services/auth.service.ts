@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthStorageService } from './auth-storage.service';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,13 @@ export class AuthService {
       this.setToken(token);
     }
   }
-
+  loginRequest(username: string, password: string) {
+    return this.http
+      .post<{ token: string }>(this.loginUrl, { username, password });
+  } 
   async login(username: string, password: string) {
     return new Promise((resolve, reject) => { 
-      this.http
-        .post<{ token: string }>(this.loginUrl, { username, password })
+        this.loginRequest(username, password)
         // Mocked user name and password, should be removed
         .pipe(catchError(async () => reject(`try another creds. Username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`)))
         .subscribe((response) => {

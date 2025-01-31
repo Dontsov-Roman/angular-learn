@@ -1,8 +1,8 @@
 <mat-card class="signin-container">
-    <h1>Sign in</h1>
-    <form [formGroup]="user" (ngSubmit)="submit()">
+    <h2 mat-dialog-title>Sign in</h2>
+    <form mat-dialog-content [formGroup]="user" (ngSubmit)="submit()">
         <div>
-            <mat-form-field>
+            <mat-form-field width="100%">
                 <mat-label>User Name</mat-label>
                 <input
                     matInput
@@ -25,10 +25,8 @@
             </mat-form-field>
             <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">{{ passwordErrors }}</mat-error>
         </div>
-        <div>
-            <mat-error *ngIf="asyncErrors">{{ asyncErrors }}</mat-error>
-        </div>
-        <div class="signin-buttons">
+        <mat-error *ngIf="asyncErrors">{{ asyncErrors }}</mat-error>
+        <div mat-dialog-actions class="signin-buttons">
             <button mat-raised-button type="submit">Sign in</button>
             <button mat-flat-button (click)="close()">Close</button>
         </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,14 +15,28 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-signin-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatCardModule, MatInputModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    DialogModule,
+  ],
   templateUrl: './signin-form.component.html',
   styleUrl: './signin-form.component.scss'
 })
 export class SigninFormComponent {
   user = new FormBuilder().nonNullable.group({
-    name: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl<string>('', {
+      validators: [Validators.required, Validators.minLength(3)],
+      updateOn: 'submit',
+    }),
+    password: new FormControl<string>('', {
+      validators: [Validators.required, Validators.minLength(4)],
+      updateOn: 'submit',
+    }),
   })
   asyncErrors?: string;
   
