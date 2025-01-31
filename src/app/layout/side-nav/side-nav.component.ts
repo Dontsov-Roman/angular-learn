@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+
+import { SideNavService } from './side-nav.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './side-nav.component.scss'
 })
 export class SideNavComponent {
-
+  @ViewChild('sidenav') public sidenav!: MatSidenav;
+  constructor(private sideNavService: SideNavService) { }
+  
+  ngAfterViewInit(): void {
+    this.sideNavService.setEntity(this.sidenav);
+  }
+  get opened(): boolean {
+    return this.sideNavService?.opened;
+  }
 }

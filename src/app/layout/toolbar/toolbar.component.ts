@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SideNavService } from '../side-nav/side-nav.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,7 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
+  constructor(private sideNavService: SideNavService) {
+  }
+  
   toggle() { 
-    console.log('toggle drawer');
+    this.sideNavService.toggle();
   }
 }
