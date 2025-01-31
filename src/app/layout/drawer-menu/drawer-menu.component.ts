@@ -10,7 +10,7 @@ export class DrawerMenuComponent {
   constructor(private authService: AuthService) {
     
   }
-  logout() { 
-    this.authService.logout();
+  async logout() { 
+    await this.authService.logout();
   }
 }

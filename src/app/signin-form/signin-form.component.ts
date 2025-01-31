@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
 import { AuthService } from '../services/auth.service';
-import { User } from './user.type';
 
 /*
     username: mor_2314
@@ -26,12 +25,12 @@ export class SigninFormComponent {
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
   })
   
-  constructor(private authService: AuthService, private dialogRef: DialogRef) {}
+  constructor(private authService: AuthService, private dialogRef: DialogRef) { }
+  
   async submit() {
     const { valid, value: { name, password } } = this.user;
     if (valid && name && password) {
       await this.authService.login(name, password);
-      console.log(this.authService.isAuthenticated(), this.authService.getAuthToken()); 
       if (this.authService.isAuthenticated())
         this.close();
     }
