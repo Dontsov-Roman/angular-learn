@@ -10,10 +10,6 @@ export class AuthService {
   private loginUrl = 'https://fakestoreapi.com/auth/login';
   private token?: string;
   private isAuth: boolean = false;
-  private mockedCreds = {
-    username: 'mor_2314',
-    password: '83r5^_'
-  };
   constructor(private http: HttpClient, private authStorage: AuthStorageService) {
     const token = this.authStorage.getToken();
     if (token) {
@@ -25,10 +21,8 @@ export class AuthService {
       .post<{ token: string }>(this.loginUrl, { username, password });
   } 
   async login(username: string, password: string) {
-    return new Promise((resolve, reject) => { 
+    return new Promise((resolve) => { 
         this.loginRequest(username, password)
-        // Mocked user name and password, should be removed
-        .pipe(catchError(async () => reject(`try another creds. Username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`)))
         .subscribe((response) => {
           if (response?.token) {
             this.setToken(response.token);
