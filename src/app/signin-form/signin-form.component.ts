@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
+import { SnackService } from '../snack/snack.service';
 
 @Component({
   selector: 'app-signin-form',
@@ -42,7 +43,7 @@ export class SigninFormComponent {
     request: new FormControl('', { updateOn: 'blur' }),
   })
   
-  constructor(private authService: AuthService, private dialogRef: DialogRef) {
+  constructor(private authService: AuthService, private dialogRef: DialogRef, private snackService: SnackService) {
   }
   
   get name() {
@@ -74,16 +75,20 @@ export class SigninFormComponent {
     const { valid, value: { name, password } } = this.user;
     if (valid && name && password) {
       this.authService.loginRequest(name.trim(), password.trim()).pipe(catchError(async (error) => {
+        const message = `${error.error}. Try: username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`;
         this.user.controls.request
           .setErrors({
-            credentials: `${error.error}. Try: username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`
+            credentials: message,
           });
+        this.snackService.showMessage({ message }, 15000);
       })).subscribe((response) => {
         if (response?.token) {
           this.authService.setToken(response.token);
           this.close();
         }
       });
+    } else {
+      this.snackService.showMessage({ message: 'Not valid username or password' });
     }
   }
   close() {

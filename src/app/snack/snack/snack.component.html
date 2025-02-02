@@ -1,0 +1,8 @@
+<div class="snack-container">
+    <div *ngIf="message" class="snack-content">
+        <span class="snack-message">
+            {{message.message}}
+        </span>
+        <button mat-icon-button class="snack-close-btn small-icon-button"  (click)="hide()"><mat-icon>close</mat-icon></button>
+    </div>
+</div>

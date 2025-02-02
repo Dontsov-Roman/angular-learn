@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 
 import { ProductListItemComponent } from './product-list-item/product-list-item.component';
 import { LayoutModule } from './layout/layout.module';
+import { SnackModule } from './snack/snack.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductListItemComponent, LayoutModule, MatSidenavModule, RouterOutlet],
+  imports: [ProductListItemComponent, LayoutModule, MatSidenavModule, RouterOutlet, SnackModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
