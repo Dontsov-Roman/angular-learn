@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AbstractSnackService, SnackMessage } from './snack.types';
 
-export type SnackMessage = {
-  message: string;
-  actionTitle?:  string;
-  action?: Function;
-};
-
+export { SnackMessage };
 @Injectable()
-export class SnackService {
+export class SnackService extends AbstractSnackService {
   private defaultTimeout = 3000;
   private timeout?: any;
   private subjectMessage = new Subject<SnackMessage | null>();
-  message = this.subjectMessage.asObservable();
+  override message = this.subjectMessage.asObservable();
 
-  private clearTimeout() {
+  protected clearTimeout() {
     clearTimeout(this.timeout);
   }
+  
   showMessage(message: SnackMessage, timeout?: number): void {
     this.subjectMessage.next(message);
     this.clearTimeout();
@@ -24,7 +21,8 @@ export class SnackService {
       this.hide();
     }, timeout || this.defaultTimeout);
   }
-  hide() {
+
+  hide(): void {
     this.subjectMessage.next(null);
   }
 }

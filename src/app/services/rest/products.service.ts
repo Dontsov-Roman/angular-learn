@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './baseService.service';
-import { ID } from './base-service';
+import { ID } from './base-service.types';
 
 export type Product = ID & {
   title: string;

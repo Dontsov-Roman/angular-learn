@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { SnackService } from './snack.service';
 import { SnackComponent } from './snack/snack.component';
+import { AbstractSnackService } from './snack.types';
 
 
 @NgModule({
@@ -14,7 +15,10 @@ import { SnackComponent } from './snack/snack.component';
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [SnackService],
+  // providers: [{
+  //   provide: AbstractSnackService,
+  //   useClass: SnackService,
+  // }],
   exports: [SnackComponent],
 })
 export class SnackModule { }

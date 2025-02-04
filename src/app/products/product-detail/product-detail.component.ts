@@ -1,13 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { Product, ProductsService } from '../services/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product, ProductsService } from '../../services/rest/products.service';
 
 @Component({
   selector: 'app-product-detail',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, MatButtonModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })

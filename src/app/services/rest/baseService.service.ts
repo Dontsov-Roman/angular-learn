@@ -2,14 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpContext } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 
-import { ID, BaseService as IBaseService } from "./base-service"
-import { Pagination } from "./pagination";
-import { SKIP_CACHING } from "../interceptors/cache.interceptor";
+import { ID, IBaseService, AbstractBaseService } from "./base-service.types"
+import { Pagination } from "../pagination";
+import { SKIP_CACHING } from "../../interceptors/cache.interceptor";
 
 @Injectable()
-export class BaseService<ItemType extends ID> implements IBaseService<ItemType> {
+export class BaseService<ItemType extends ID> extends AbstractBaseService<ItemType> implements IBaseService<ItemType> {
     protected baseUrl = '';
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        super();
+    }
     
     getById(id: number): Observable<ItemType> {
         return this.http.get<ItemType>(`${this.baseUrl}/${id}`);

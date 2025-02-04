@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
-import { asyncScheduler, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { SnackService, SnackMessage } from '../snack.service';
+import { AbstractSnackService, SnackMessage } from '../snack.types';
+import { SnackService } from '../snack.service';
 
 @Component({
   selector: 'app-snack',

@@ -12,6 +12,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { SideNavService } from './side-nav/side-nav.service';
 import { SigninFormComponent } from '../signin-form/signin-form.component';
 import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
+import { SnackService } from '../snack/snack.service';
 
 @NgModule({
   declarations: [ToolbarComponent, SideNavComponent, DrawerMenuComponent],
@@ -30,6 +31,7 @@ import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
     Dialog,
     SigninFormComponent,
     DrawerMenuComponent,
+    SnackService,
   ]
 })
 export class LayoutModule { }

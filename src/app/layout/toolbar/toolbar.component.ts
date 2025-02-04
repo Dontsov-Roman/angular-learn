@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 
 import { SideNavService } from '../side-nav/side-nav.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { SigninFormComponent } from '../../signin-form/signin-form.component';
 
 @Component({

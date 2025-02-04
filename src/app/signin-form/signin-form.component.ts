@@ -7,8 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { SnackService } from '../snack/snack.service';
+import { SnackModule } from '../snack/snack.module';
 
 @Component({
   selector: 'app-signin-form',
@@ -21,6 +22,7 @@ import { SnackService } from '../snack/snack.service';
     MatCardModule,
     MatInputModule,
     DialogModule,
+    SnackModule,
   ],
   templateUrl: './signin-form.component.html',
   styleUrl: './signin-form.component.scss'
