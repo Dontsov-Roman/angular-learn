@@ -17,5 +17,5 @@ export abstract class AbstractSnackService {
     abstract message: Observable<SnackMessage | null>;
     protected abstract  clearTimeout(): void;
     abstract showMessage(message: SnackMessage, timeout?: number): void;
-    abstract hide(): void;
+    abstract hide(message: SnackMessage): void;
 }

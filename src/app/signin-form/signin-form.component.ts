@@ -89,7 +89,7 @@ export class SigninFormComponent {
         this.snackService.showMessage({ message, type: MessageType.Info }, 7000);
       })).subscribe((response) => {
         if (response?.token) {
-          this.authService.setToken(response.token);
+          this.authService.successLogin(response.token);
           this.close();
         }
       });

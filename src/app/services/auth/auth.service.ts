@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@angular/core';
 import { AuthStorageService } from './auth-storage.service';
 import { AbstractAuth, LOGIN_URL_TOKEN } from './auth.types';
 import { BASE_SERVICE_URL_TOKEN } from '../rest/baseService.service';
+import { AbstractProfileService, User } from '../../user-profile/user-profile.types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,14 @@ export class AuthService extends AbstractAuth {
   constructor(
     private http: HttpClient,
     private authStorage: AuthStorageService,
+    private profileService: AbstractProfileService<User>,
     @Inject(BASE_SERVICE_URL_TOKEN) protected baseUrl: string,
     @Inject(LOGIN_URL_TOKEN) protected url: string = 'auth/login',
   ) {
     super();
     this.authStorage.getToken().then((token) => {
       if (token) {
-        this.setToken(token);
+        this.successLogin(token);
       }
     });
   }
@@ -33,16 +35,17 @@ export class AuthService extends AbstractAuth {
         this.loginRequest(username, password)
         .subscribe((response) => {
           if (response?.token) {
-            this.setToken(response.token);
+            this.successLogin(response.token);
             resolve(true);
           }
         });
     });
   }
 
-  setToken(token: string) {
+  async successLogin(token: string) {
     this.authStorage.setToken(token);
     this.token = token;
+    await this.profileService.loadProfile();
     this.isAuth = true;
   }
   async logout() {

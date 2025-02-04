@@ -8,7 +8,7 @@ export type WithToken = {
 export abstract class AbstractAuth extends AbstractWithUrls {
     abstract loginRequest(username: string, password: string): Observable<WithToken>;
     abstract login(username: string, password: string): Promise<boolean>;
-    abstract setToken(token: string): void;
+    abstract successLogin(token: string): Promise<void>;
     abstract logout(): Promise<void>;
     abstract getAuthToken(): string | undefined;
     abstract isAuthenticated(): boolean

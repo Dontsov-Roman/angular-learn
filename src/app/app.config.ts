@@ -7,8 +7,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { httpInterceptorProviders } from './interceptors';
 import { DrawerMenuComponent } from './layout/drawer-menu/drawer-menu.component';
-import { BASE_SERVICE_URL_TOKEN } from './services/rest/baseService.service';
-import { LOGIN_URL_TOKEN } from './services/auth/auth.types';
+import { urlProviders } from './app.urls.providers';
+import { UserProfileService } from './user-profile/user-profile.service';
+import { AbstractProfileService } from './user-profile/user-profile.types';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,13 +18,10 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     httpInterceptorProviders,
     DrawerMenuComponent,
+    urlProviders,
     {
-      provide: BASE_SERVICE_URL_TOKEN,
-      useValue: 'https://fakestoreapi.com',
-    },
-    {
-      provide: LOGIN_URL_TOKEN,
-      useValue: 'auth/login',
+      provide: AbstractProfileService,
+      useClass: UserProfileService,
     }
   ]
 };

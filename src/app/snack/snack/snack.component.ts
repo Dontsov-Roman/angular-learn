@@ -19,8 +19,8 @@ export class SnackComponent implements OnDestroy {
         this.message = snackMessage;
       });
   }
-  hide() {
-    this.snackService.hide();
+  hide(message: SnackMessage) {
+    this.snackService.hide(message);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

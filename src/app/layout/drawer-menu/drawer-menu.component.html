@@ -1,1 +1,8 @@
-<button mat-flat-button (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
+<mat-list role="list">
+    <app-user-profile />
+    <mat-list-item>
+        <button mat-flat-button (click)="logout()">
+            <mat-icon>logout</mat-icon>Logout
+        </button>
+    </mat-list-item>
+</mat-list>
