@@ -68,7 +68,7 @@ export class SigninFormComponent {
   extractErrors(errors: ValidationErrors): string {
     const requiredError = `${errors?.['required'] ? 'Field is required' : ''}`;
     const minLengthError = `${errors?.['minlength'] ? `Min length: ${errors?.['minlength'].requiredLength}` : ''}`;
-    const serverMessage = `${errors?.['serverMessage']}`;
+    const serverMessage = `${errors?.['serverMessage'] ?? ''}`;
     return `${requiredError} ${minLengthError} ${serverMessage}`;
   }
   async submit() {
