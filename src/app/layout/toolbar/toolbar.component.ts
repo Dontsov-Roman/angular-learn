@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 
 import { SideNavService } from '../side-nav/side-nav.service';
@@ -11,10 +11,10 @@ import { SigninFormComponent } from '../../signin-form/signin-form.component';
   styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent {
-  dialog = inject(Dialog);
   constructor(
     private sideNavService: SideNavService,
     private authService: AuthService,
+    private dialog: Dialog,
   ) {
   }
   

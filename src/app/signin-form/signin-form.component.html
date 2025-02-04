@@ -21,7 +21,6 @@
                     id="user-password"
                     type="password"
                     formControlName="password"
-                    (blur)="resetRequestError()"
                 />
             </mat-form-field>
             <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">{{ passwordErrors }}</mat-error>

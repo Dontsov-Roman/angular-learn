@@ -65,17 +65,11 @@ export class SigninFormComponent {
     const errors = this.password?.errors;
     return errors ? this.extractErrors(errors) : '';
   }
-  get requestErrors() {
-    return this.user.get('request')?.errors?.['credentials'];
-  }
   extractErrors(errors: ValidationErrors): string {
     const requiredError = `${errors?.['required'] ? 'Field is required' : ''}`;
     const minLengthError = `${errors?.['minlength'] ? `Min length: ${errors?.['minlength'].requiredLength}` : ''}`;
     const serverMessage = `${errors?.['serverMessage']}`;
     return `${requiredError} ${minLengthError} ${serverMessage}`;
-  }
-  resetRequestError() {
-    this.user.get('request')?.reset();
   }
   async submit() {
     const { valid, value: { name, password } } = this.user;
