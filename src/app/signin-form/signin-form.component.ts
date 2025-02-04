@@ -45,8 +45,11 @@ export class SigninFormComponent {
     }),
   })
   
-  constructor(private authService: AuthService, private dialogRef: DialogRef, private snackService: SnackService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private dialogRef: DialogRef,
+    private snackService: SnackService,
+  ) { }
   
   get name() {
     return this.user.get('name');
