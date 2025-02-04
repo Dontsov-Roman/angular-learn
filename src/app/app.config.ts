@@ -7,6 +7,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { httpInterceptorProviders } from './interceptors';
 import { DrawerMenuComponent } from './layout/drawer-menu/drawer-menu.component';
+import { BASE_SERVICE_URL_TOKEN } from './services/rest/baseService.service';
+import { LOGIN_URL_TOKEN } from './services/auth/auth.types';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,5 +17,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     httpInterceptorProviders,
     DrawerMenuComponent,
+    {
+      provide: BASE_SERVICE_URL_TOKEN,
+      useValue: 'https://fakestoreapi.com',
+    },
+    {
+      provide: LOGIN_URL_TOKEN,
+      useValue: 'auth/login',
+    }
   ]
 };

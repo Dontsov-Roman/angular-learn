@@ -1,5 +1,7 @@
 import { Observable } from "rxjs";
+
 import { Pagination, PaginationMeta } from "../pagination";
+import { AbstractWithUrls } from "../with-url.types";
 
 export type ID = {
     id: number;
@@ -16,10 +18,7 @@ export interface IBaseService<Item extends ID> {
     deleteById(id: number): Observable<boolean>;
 }
 
-export abstract class AbstractBaseService<Item extends ID> implements IBaseService<Item> {
-    protected abstract baseUrl: string;
-    protected abstract url: string;
-    protected abstract fullUrl: string;
+export abstract class AbstractBaseService<Item extends ID> extends AbstractWithUrls implements IBaseService<Item> {
     abstract getById(id: number): Observable<Item>;
     abstract getList(pagination?: Partial<Pagination>): Observable<ListType<Item>>;
     abstract update(item: Partial<Item> & ID): Observable<Item>;

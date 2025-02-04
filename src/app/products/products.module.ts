@@ -29,10 +29,6 @@ import { BASE_SERVICE_URL_TOKEN, BaseService, SERVICE_URL_TOKEN } from '../servi
       useClass: BaseService,
     },
     {
-      provide: BASE_SERVICE_URL_TOKEN,
-      useValue: 'https://fakestoreapi.com',
-    },
-    {
       provide: SERVICE_URL_TOKEN,
       useValue: 'products',
     }

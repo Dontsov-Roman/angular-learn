@@ -10,11 +10,10 @@ export const SERVICE_URL_TOKEN = new InjectionToken<string>("current url injecti
 
 @Injectable()
 export class BaseService<ItemType extends ID> extends AbstractBaseService<ItemType> implements IBaseService<ItemType> {
-    // protected baseUrl = '';
     constructor(
         private http: HttpClient,
-        @Inject(BASE_SERVICE_URL_TOKEN) @Optional() protected baseUrl: string,
-        @Inject(SERVICE_URL_TOKEN) @Optional() protected url: string,
+        @Inject(BASE_SERVICE_URL_TOKEN) protected baseUrl: string,
+        @Inject(SERVICE_URL_TOKEN) protected url: string,
     ) { 
         super();
     }
