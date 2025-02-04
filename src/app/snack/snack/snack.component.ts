@@ -11,8 +11,6 @@ import { SnackService } from '../snack.service';
 })
 export class SnackComponent implements OnDestroy {
   message?: SnackMessage | null;
-  protected defaultHideTime = 3000;
-
   private subscription: Subscription;
   
   constructor(private snackService: SnackService) {

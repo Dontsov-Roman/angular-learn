@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { SnackService } from './snack.service';
 import { SnackComponent } from './snack/snack.component';
-import { AbstractSnackService } from './snack.types';
+import { SnackService } from './snack.service';
 
 
 @NgModule({
@@ -15,10 +14,7 @@ import { AbstractSnackService } from './snack.types';
     MatIconModule,
     MatButtonModule,
   ],
-  // providers: [{
-  //   provide: AbstractSnackService,
-  //   useClass: SnackService,
-  // }],
+  providers: [SnackService],
   exports: [SnackComponent],
 })
 export class SnackModule { }

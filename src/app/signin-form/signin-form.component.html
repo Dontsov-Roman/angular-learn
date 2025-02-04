@@ -25,7 +25,6 @@
                 />
             </mat-form-field>
             <mat-error *ngIf="password && password.invalid && (password.dirty || password.touched)">{{ passwordErrors }}</mat-error>
-            <mat-error *ngIf="requestErrors">{{ requestErrors }}</mat-error>
         </div>
         <div mat-dialog-actions class="signin-buttons">
             <button mat-raised-button [disabled]="disabled" type="submit">Sign in</button>

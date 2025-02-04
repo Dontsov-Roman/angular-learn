@@ -42,7 +42,6 @@ export class SigninFormComponent {
       validators: [Validators.required, Validators.minLength(4)],
       updateOn: 'submit',
     }),
-    request: new FormControl('', { updateOn: 'blur' }),
   })
   
   constructor(private authService: AuthService, private dialogRef: DialogRef, private snackService: SnackService) {
@@ -68,7 +67,8 @@ export class SigninFormComponent {
   extractErrors(errors: ValidationErrors): string {
     const requiredError = `${errors?.['required'] ? 'Field is required' : ''}`;
     const minLengthError = `${errors?.['minlength'] ? `Min length: ${errors?.['minlength'].requiredLength}` : ''}`;
-    return `${requiredError} ${minLengthError}`;
+    const credentialsError = `${errors?.['credentials']}`;
+    return `${requiredError} ${minLengthError} ${credentialsError}`;
   }
   resetRequestError() {
     this.user.get('request')?.reset();
@@ -78,7 +78,7 @@ export class SigninFormComponent {
     if (valid && name && password) {
       this.authService.loginRequest(name.trim(), password.trim()).pipe(catchError(async (error) => {
         const message = `${error.error}. Try: username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`;
-        this.user.controls.request
+        this.user.controls.password
           .setErrors({
             credentials: message,
           });
