@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../services/rest/products.service';
 import { AbstractBaseService } from '../../services/rest/base-service.types';
+import { Product } from '../products.types';
 
 @Component({
   selector: 'app-product-detail',

@@ -10,6 +10,7 @@ import { catchError } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { SnackService } from '../snack/snack.service';
 import { SnackModule } from '../snack/snack.module';
+import { MessageType } from '../snack/snack.types';
 
 @Component({
   selector: 'app-signin-form',
@@ -82,7 +83,7 @@ export class SigninFormComponent {
           .setErrors({
             credentials: message,
           });
-        this.snackService.showMessage({ message }, 15000);
+        this.snackService.showMessage({ message, type: MessageType.Info }, 7000);
       })).subscribe((response) => {
         if (response?.token) {
           this.authService.setToken(response.token);
@@ -90,7 +91,7 @@ export class SigninFormComponent {
         }
       });
     } else {
-      this.snackService.showMessage({ message: 'Not valid username or password' });
+      this.snackService.showMessage({ message: 'Not valid username or password', type: MessageType.Alert });
     }
   }
   close() {

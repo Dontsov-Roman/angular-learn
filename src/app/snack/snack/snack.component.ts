@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AbstractSnackService, SnackMessage } from '../snack.types';
+import { SnackMessage } from '../snack.types';
 import { SnackService } from '../snack.service';
 
 @Component({

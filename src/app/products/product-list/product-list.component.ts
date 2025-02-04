@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Product } from '../../services/rest/products.service';
 import { AbstractBaseService, ListType } from '../../services/rest/base-service.types';
+import { Product } from '../products.types';
 
 @Component({
   selector: 'app-product-list',

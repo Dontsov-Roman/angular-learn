@@ -1,7 +1,14 @@
 import { Observable } from "rxjs";
 
+export enum MessageType {
+  Default = 'default',
+  Alert = 'alert',
+  Warn = 'warn',
+  Info = 'info',
+}
 export type SnackMessage = {
   message: string;
+  type?: MessageType;
   actionTitle?:  string;
   action?: Function;
 };

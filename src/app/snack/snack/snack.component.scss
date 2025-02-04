@@ -8,6 +8,19 @@
     z-index: 100;
 }
 .snack-content {
+    &.alert {
+        background: darkred;
+    }
+    &.default {
+        background: darkcyan;
+    }
+    &.info {
+        background: lightblue;
+        color: black;
+    }
+    &.warn {
+        background: darkgoldenrod;
+    }
     background: darkcyan;
     padding: 12px;
     border-radius: 12px;
@@ -15,7 +28,7 @@
     position: relative;
 }
 .snack-close-btn {
-    background-color: darkcyan;
+    background: inherit;
     position: absolute;
     top: -12px;
     right: -12px;
