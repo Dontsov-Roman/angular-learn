@@ -17,6 +17,7 @@ export interface IBaseService<Item extends ID> {
 }
 
 export abstract class AbstractBaseService<Item extends ID> implements IBaseService<Item> {
+    protected abstract baseUrl: string;
     abstract getById(id: number): Observable<Item>;
     abstract getList(pagination?: Partial<Pagination>): Observable<ListType<Item>>;
     abstract update(item: Partial<Item> & ID): Observable<Item>;

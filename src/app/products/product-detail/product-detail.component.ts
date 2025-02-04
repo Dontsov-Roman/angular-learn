@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product, ProductsService } from '../../services/rest/products.service';
+import { Product } from '../../services/rest/products.service';
+import { AbstractBaseService } from '../../services/rest/base-service.types';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,7 +11,7 @@ import { Product, ProductsService } from '../../services/rest/products.service';
 export class ProductDetailComponent {
   @Input() item!: Product;
   route: ActivatedRoute = inject(ActivatedRoute);
-  constructor(private service: ProductsService) {
+  constructor(private service: AbstractBaseService<Product>) {
     this.service.getById(Number(this.route.snapshot.params['id'])).subscribe(item => this.item = item);
   }
 }

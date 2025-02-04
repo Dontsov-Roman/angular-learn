@@ -9,9 +9,7 @@ export type Product = ID & {
   image: string;
   category: string;
 }
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductsService extends BaseService<Product>{
   protected override baseUrl: string = 'https://fakestoreapi.com/products';
 }
