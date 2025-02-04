@@ -17,10 +17,6 @@ export class BaseService<ItemType extends ID> extends AbstractBaseService<ItemTy
     ) { 
         super();
     }
-
-    get fullUrl() {
-        return `${this.baseUrl}/${this.url}`;
-    }
     
     getById(id: number): Observable<ItemType> {
         return this.http.get<ItemType>(`${this.fullUrl}/${id}`);

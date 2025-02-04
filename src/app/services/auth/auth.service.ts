@@ -24,9 +24,6 @@ export class AuthService extends AbstractAuth {
       }
     });
   }
-  get fullUrl() {
-    return `${this.baseUrl}/${this.url}`;
-  }
   loginRequest(username: string, password: string) {
     return this.http
       .post<{ token: string }>(this.fullUrl, { username, password });

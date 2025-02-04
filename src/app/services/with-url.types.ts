@@ -6,5 +6,7 @@ export interface IWithUrl {
 export abstract class AbstractWithUrls {
     protected abstract baseUrl: string;
     protected abstract url: string;
-    protected abstract fullUrl: string;
+    get fullUrl() {
+        return `${this.baseUrl}/${this.url}`;
+    }
 }

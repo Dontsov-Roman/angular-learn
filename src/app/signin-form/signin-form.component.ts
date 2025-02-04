@@ -68,8 +68,8 @@ export class SigninFormComponent {
   extractErrors(errors: ValidationErrors): string {
     const requiredError = `${errors?.['required'] ? 'Field is required' : ''}`;
     const minLengthError = `${errors?.['minlength'] ? `Min length: ${errors?.['minlength'].requiredLength}` : ''}`;
-    const credentialsError = `${errors?.['credentials']}`;
-    return `${requiredError} ${minLengthError} ${credentialsError}`;
+    const serverMessage = `${errors?.['serverMessage']}`;
+    return `${requiredError} ${minLengthError} ${serverMessage}`;
   }
   resetRequestError() {
     this.user.get('request')?.reset();
@@ -81,7 +81,7 @@ export class SigninFormComponent {
         const message = `${error.error}. Try: username: ${this.mockedCreds.username} and password: ${this.mockedCreds.password}`;
         this.user.controls.password
           .setErrors({
-            credentials: message,
+            serverMessage: message,
           });
         this.snackService.showMessage({ message, type: MessageType.Info }, 7000);
       })).subscribe((response) => {
