@@ -10,6 +10,7 @@ import { DrawerMenuComponent } from './layout/drawer-menu/drawer-menu.component'
 import { urlProviders } from './app.urls.providers';
 import { UserProfileService } from './user-profile/user-profile.service';
 import { AbstractProfileService } from './user-profile/user-profile.types';
+import { SIGN_IN_DIALOG_ANIMATION } from './layout/toolbar/toolbar.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: AbstractProfileService,
       useClass: UserProfileService,
+    },
+    {
+      provide: SIGN_IN_DIALOG_ANIMATION,
+      useValue: 400,
     }
   ]
 };

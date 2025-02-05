@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { Dialog } from '@angular/cdk/dialog';
+import { Component, Inject, InjectionToken, Optional } from '@angular/core';
+import { MatDialog as Dialog } from '@angular/material/dialog';
 
 import { SideNavService } from '../side-nav/side-nav.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { SigninFormComponent } from '../../signin-form/signin-form.component';
 
+export const SIGN_IN_DIALOG_ANIMATION = new InjectionToken<number>('SIGNIN DIALOG ANIMATION DURATION');
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,6 +16,7 @@ export class ToolbarComponent {
     private sideNavService: SideNavService,
     private authService: AuthService,
     private dialog: Dialog,
+    @Inject(SIGN_IN_DIALOG_ANIMATION) private animationDuration = 300,
   ) {
   }
   
@@ -22,7 +24,7 @@ export class ToolbarComponent {
     this.sideNavService.toggle();
   }
   openSigninModal() {
-    this.dialog.open(SigninFormComponent);
+    this.dialog.open(SigninFormComponent, { enterAnimationDuration: this.animationDuration, exitAnimationDuration: this.animationDuration });
   }
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated()

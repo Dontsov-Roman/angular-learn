@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { DialogModule, DialogRef } from '@angular/cdk/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,7 +22,7 @@ import { MessageType } from '../snack/snack.types';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    DialogModule,
+    MatDialogModule,
     SnackModule,
   ],
   templateUrl: './signin-form.component.html',
@@ -47,7 +47,7 @@ export class SigninFormComponent {
   
   constructor(
     private authService: AuthService,
-    private dialogRef: DialogRef,
+    private dialogRef: MatDialogRef<SigninFormComponent>,
     private snackService: SnackService,
   ) { }
   
