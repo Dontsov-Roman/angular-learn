@@ -27,6 +27,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: SIGN_IN_DIALOG_ANIMATION,
       useValue: 400,
-    }
+    },
   ]
 };

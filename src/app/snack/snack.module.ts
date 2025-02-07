@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { SnackComponent } from './snack/snack.component';
+import { SNACK_COMPONENT_SERVICE_TOKEN, SnackComponent } from './snack/snack.component';
 import { SnackService } from './snack.service';
 
 
@@ -14,7 +14,13 @@ import { SnackService } from './snack.service';
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [SnackService],
+  providers: [
+    SnackService,
+    {
+      provide: SNACK_COMPONENT_SERVICE_TOKEN,
+      useExisting: SnackService,
+    }
+  ],
   exports: [SnackComponent],
 })
 export class SnackModule { }

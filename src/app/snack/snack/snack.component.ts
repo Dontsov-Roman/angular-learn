@@ -1,7 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, inject, InjectionToken, OnDestroy } from '@angular/core';
 
-import { SnackMessage } from '../snack.types';
+import { ISnackService, SnackMessage } from '../snack.types';
 import { SnackService } from '../snack.service';
+
+export const SNACK_COMPONENT_SERVICE_TOKEN = new InjectionToken<ISnackService>('Snack Service class');
 
 @Component({
   selector: 'app-snack',
@@ -9,11 +11,10 @@ import { SnackService } from '../snack.service';
   styleUrl: './snack.component.scss'
 })
 export class SnackComponent implements OnDestroy {
+  private snackService = inject<SnackService>(SNACK_COMPONENT_SERVICE_TOKEN);
   messages = this.snackService.messages
   // private interval = interval(300).subscribe(() => this.snackService.clearOldMessages());
 
-  constructor(private snackService: SnackService) { }
-  
   hide(message: SnackMessage) {
     this.snackService.hide(message);
   }

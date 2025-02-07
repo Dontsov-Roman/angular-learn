@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { SideNavService } from '../side-nav/side-nav.service';
+import { ISnackService } from '../../snack/snack.types';
+import { SNACK_COMPONENT_SERVICE_TOKEN } from '../../snack/snack/snack.component';
 
 @Component({
   selector: 'app-drawer-menu',
@@ -9,14 +11,13 @@ import { SideNavService } from '../side-nav/side-nav.service';
   styleUrl: './drawer-menu.component.scss'
 })
 export class DrawerMenuComponent {
-  constructor(
-    private authService: AuthService,
-    private sideNavService: SideNavService,
-  ) {
-    
-  }
+  private snackService = inject<ISnackService>(SNACK_COMPONENT_SERVICE_TOKEN);
+  private authService = inject(AuthService);
+  private sideNavService = inject(SideNavService);
+
   async logout() { 
     await this.authService.logout();
     this.sideNavService.close();
+    this.snackService.showMessage({ message: 'Come back soon!' });
   }
 }

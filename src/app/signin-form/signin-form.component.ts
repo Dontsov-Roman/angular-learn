@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
@@ -8,9 +8,9 @@ import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs';
 
 import { AuthService } from '../services/auth/auth.service';
-import { SnackService } from '../snack/snack.service';
 import { SnackModule } from '../snack/snack.module';
-import { MessageType } from '../snack/snack.types';
+import { ISnackService, MessageType } from '../snack/snack.types';
+import { SNACK_COMPONENT_SERVICE_TOKEN } from '../snack/snack/snack.component';
 
 @Component({
   selector: 'app-signin-form',
@@ -29,6 +29,10 @@ import { MessageType } from '../snack/snack.types';
   styleUrl: './signin-form.component.scss'
 })
 export class SigninFormComponent {
+  private authService = inject(AuthService);
+  private dialogRef = inject(MatDialogRef<SigninFormComponent>);
+  private snackService = inject<ISnackService>(SNACK_COMPONENT_SERVICE_TOKEN);
+
   private mockedCreds = {
     username: 'mor_2314',
     password: '83r5^_'
@@ -44,12 +48,6 @@ export class SigninFormComponent {
       updateOn: 'submit',
     }),
   })
-  
-  constructor(
-    private authService: AuthService,
-    private dialogRef: MatDialogRef<SigninFormComponent>,
-    private snackService: SnackService,
-  ) { }
   
   get name() {
     return this.user.get('name');
