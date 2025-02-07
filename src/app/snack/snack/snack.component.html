@@ -1,5 +1,5 @@
 <div class="snack-container">
-    <div *ngFor="let msg of messages()" class="snack-content" [class]="msg.type">
+    <div *ngFor="let msg of (messages | async)" class="snack-content" [class]="msg.type">
         <span class="snack-message">
             {{msg?.message}}
         </span>

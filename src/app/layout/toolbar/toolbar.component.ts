@@ -1,4 +1,4 @@
-import { Component, Inject, InjectionToken, Optional } from '@angular/core';
+import { Component, Inject, InjectionToken } from '@angular/core';
 import { MatDialog as Dialog } from '@angular/material/dialog';
 
 import { SideNavService } from '../side-nav/side-nav.service';

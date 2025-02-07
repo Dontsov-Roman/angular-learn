@@ -12,9 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { SideNavService } from './side-nav/side-nav.service';
-import { SigninFormComponent } from '../signin-form/signin-form.component';
 import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
-import { SnackService } from '../snack/snack.service';
 import { UserProfileModule } from '../user-profile/user-profile.module';
 
 @NgModule({
@@ -35,9 +33,7 @@ import { UserProfileModule } from '../user-profile/user-profile.module';
   providers: [
     SideNavService,
     Dialog,
-    SigninFormComponent,
     DrawerMenuComponent,
-    SnackService,
   ]
 })
 export class LayoutModule { }

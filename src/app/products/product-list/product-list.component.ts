@@ -10,9 +10,7 @@ import { Observable } from 'rxjs';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
-  constructor(private service: AbstractBaseService<Product>) {}
-
-  get list$() { 
-    return this.service.getList();
+  list$: Observable<ListType<Product>> = this.service.getList();
+  constructor(private service: AbstractBaseService<Product>) {
   }
 }

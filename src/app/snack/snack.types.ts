@@ -16,6 +16,7 @@ export type SnackMessage = {
 
 export interface ISnackService {
   messages: Signal<SnackMessage[]>;
+  clearOldMessages(): void;
   showMessage(message: SnackMessage, timeout?: number): void;
   hide(message: SnackMessage): void;
 }
