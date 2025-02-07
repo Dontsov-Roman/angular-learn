@@ -1,2 +1,2 @@
-<mat-list-item *ngIf="profile">{{fullName}}</mat-list-item>
-<mat-list-item *ngIf="profile">{{profile.phone}}</mat-list-item>
+<mat-list-item *ngIf="(profile$ | async) as profile">{{profile.name.firstname}} {{profile.name.lastname}}</mat-list-item>
+<mat-list-item *ngIf="(profile$ | async) as profile">{{profile.phone}}</mat-list-item>

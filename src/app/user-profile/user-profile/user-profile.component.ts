@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { AbstractProfileService, User } from '../user-profile.types';
 
@@ -8,11 +8,6 @@ import { AbstractProfileService, User } from '../user-profile.types';
   styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent {
-  constructor(private profileService: AbstractProfileService<User>) { }
-  get profile() {
-    return this.profileService.profile;
-  }
-  get fullName() {
-    return `${this.profile?.name.firstname} ${this.profile?.name.lastname}`
-  }
+  private profileService = inject(AbstractProfileService);
+  profile$ = this.profileService.getProfile();
 }

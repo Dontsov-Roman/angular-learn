@@ -1,5 +1,5 @@
 <mat-list role="list">
-    <app-user-profile />
+    <app-user-profile *ngIf="showUserProfile()" />
     <mat-list-item>
         <button mat-flat-button (click)="logout()">
             <mat-icon>logout</mat-icon>Logout

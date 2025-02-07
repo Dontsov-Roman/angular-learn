@@ -25,7 +25,5 @@ export type User = ID & {
     address: Address;
 };
 export abstract class AbstractProfileService<T extends ID> extends AbstractWithUrls {
-    abstract profile?: T;
-    abstract loadProfile(): Promise<T>;
-    abstract getProfileRequest(): Observable<T>;
+    abstract getProfile(): Observable<T>;
 }

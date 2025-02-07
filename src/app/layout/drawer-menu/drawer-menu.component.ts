@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { SideNavService } from '../side-nav/side-nav.service';
@@ -14,7 +14,7 @@ export class DrawerMenuComponent {
   private snackService = inject<ISnackService>(SNACK_COMPONENT_SERVICE_TOKEN);
   private authService = inject(AuthService);
   private sideNavService = inject(SideNavService);
-
+  showUserProfile = computed(() => this.authService.isAuthenticated());
   async logout() { 
     await this.authService.logout();
     this.sideNavService.close();
