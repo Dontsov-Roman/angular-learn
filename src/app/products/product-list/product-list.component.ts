@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { AbstractBaseService, ListType } from '../../services/rest/base-service.types';
 import { Product } from '../products.types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -9,9 +10,9 @@ import { Product } from '../products.types';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
-  list: ListType<Product> = { data: [], pagination: { total: 0 } };
+  constructor(private service: AbstractBaseService<Product>) {}
 
-  constructor(private service: AbstractBaseService<Product>) {
-    this.service.getList().subscribe(list => this.list = list);
+  get list$() { 
+    return this.service.getList();
   }
 }

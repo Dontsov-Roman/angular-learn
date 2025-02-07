@@ -1,28 +1,32 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { AbstractSnackService, SnackMessage } from './snack.types';
+import { Injectable, OnDestroy, signal } from '@angular/core';
+import { interval } from 'rxjs';
+import { ISnackService, SnackMessage } from './snack.types';
 
-export { SnackMessage };
 @Injectable()
-export class SnackService extends AbstractSnackService {
+export class SnackService implements ISnackService, OnDestroy {
   private defaultTimeout = 3000;
-  private timeout?: any;
-  private subjectMessage = new BehaviorSubject<SnackMessage | null>(null);
-  override message = this.subjectMessage.asObservable();
+  messages = signal<SnackMessage[]>([]);
+  private intervalSubscriber = interval(300).subscribe(() => this.clearOldMessages());
 
-  protected clearTimeout() {
-    clearTimeout(this.timeout);
+  private clearOldMessages() {
+    const oldMessages = this.messages();
+    const newMessages = oldMessages.filter(({ ttl }) => ttl && ttl > Date.now());
+    if (newMessages.length !== oldMessages.length) {
+      this.messages.set(newMessages);
+    }
   }
   
   showMessage(message: SnackMessage, timeout?: number): void {
-    this.subjectMessage.next(message);
-    this.clearTimeout();
-    this.timeout = setTimeout(() => {
-      this.hide(message);
-    }, timeout || this.defaultTimeout);
+    const ttl = Date.now() + (timeout || this.defaultTimeout);
+    const newMessage = { ...message, ttl };
+    this.messages.set([...this.messages(), newMessage]);
   }
 
   hide(message: SnackMessage): void {
-    this.subjectMessage.next(null);
+    this.messages.set(this.messages().filter(msg => msg.ttl && msg.ttl !== message.ttl));
+  }
+
+  ngOnDestroy(): void {
+    this.intervalSubscriber.unsubscribe();
   }
 }

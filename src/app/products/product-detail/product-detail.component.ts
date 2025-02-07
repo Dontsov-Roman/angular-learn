@@ -9,9 +9,10 @@ import { Product } from '../products.types';
   styleUrl: './product-detail.component.scss'
 })
 export class ProductDetailComponent {
-  @Input() item!: Product;
   route: ActivatedRoute = inject(ActivatedRoute);
   constructor(private service: AbstractBaseService<Product>) {
-    this.service.getById(Number(this.route.snapshot.params['id'])).subscribe(item => this.item = item);
+  }
+  get item$() {
+    return this.service.getById(Number(this.route.snapshot.params['id']));
   }
 }

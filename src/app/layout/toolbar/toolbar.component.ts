@@ -26,6 +26,13 @@ export class ToolbarComponent {
   openSigninModal() {
     this.dialog.open(SigninFormComponent, { enterAnimationDuration: this.animationDuration, exitAnimationDuration: this.animationDuration });
   }
+  click() {
+    if (this.authService.isAuthenticated()) {
+      this.toggle()
+    } else {
+      this.openSigninModal();
+    }
+  }
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated()
   }

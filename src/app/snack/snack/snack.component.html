@@ -1,8 +1,8 @@
 <div class="snack-container">
-    <div *ngIf="message" class="snack-content" [class]="message.type">
+    <div *ngFor="let msg of messages()" class="snack-content" [class]="msg.type">
         <span class="snack-message">
-            {{message.message}}
+            {{msg?.message}}
         </span>
-        <button mat-icon-button class="snack-close-btn small-icon-button"  (click)="hide(message)"><mat-icon>close</mat-icon></button>
+        <button mat-icon-button class="snack-close-btn small-icon-button"  (click)="hide(msg)"><mat-icon>close</mat-icon></button>
     </div>
 </div>

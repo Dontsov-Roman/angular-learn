@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 import { SideNavService } from './side-nav.service';
@@ -8,7 +8,7 @@ import { SideNavService } from './side-nav.service';
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss'
 })
-export class SideNavComponent {
+export class SideNavComponent implements AfterViewInit {
   @ViewChild('sidenav') public sidenav!: MatSidenav;
   constructor(private sideNavService: SideNavService) { }
   

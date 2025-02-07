@@ -1,5 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 
 import { SnackMessage } from '../snack.types';
 import { SnackService } from '../snack.service';
@@ -9,20 +8,12 @@ import { SnackService } from '../snack.service';
   templateUrl: './snack.component.html',
   styleUrl: './snack.component.scss'
 })
-export class SnackComponent implements OnDestroy {
-  message?: SnackMessage | null;
-  private subscription: Subscription;
-  
-  constructor(private snackService: SnackService) {
-    this.subscription = this.snackService.message
-      .subscribe((snackMessage) => {
-        this.message = snackMessage;
-      });
+export class SnackComponent {
+  constructor(private snackService: SnackService) {}
+  get messages() {
+    return this.snackService.messages;
   }
   hide(message: SnackMessage) {
     this.snackService.hide(message);
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

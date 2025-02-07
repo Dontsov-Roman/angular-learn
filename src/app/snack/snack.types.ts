@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Signal } from "@angular/core";
 
 export enum MessageType {
   Default = 'default',
@@ -8,14 +8,14 @@ export enum MessageType {
 }
 export type SnackMessage = {
   message: string;
+  ttl?: number;
   type?: MessageType;
   actionTitle?:  string;
   action?: Function;
 };
 
-export abstract class AbstractSnackService {
-    abstract message: Observable<SnackMessage | null>;
-    protected abstract  clearTimeout(): void;
-    abstract showMessage(message: SnackMessage, timeout?: number): void;
-    abstract hide(message: SnackMessage): void;
+export interface ISnackService {
+  messages: Signal<SnackMessage[]>;
+  showMessage(message: SnackMessage, timeout?: number): void;
+  hide(message: SnackMessage): void;
 }

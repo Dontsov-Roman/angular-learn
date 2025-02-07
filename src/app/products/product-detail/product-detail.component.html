@@ -1,4 +1,4 @@
-<div *ngIf="item" class="product">
+<div *ngIf="(item$ | async) as item" class="product">
     <img class="product-image" [src]="item.image" [alt]="item.description" />
     <section class="product-title">
         <div>
