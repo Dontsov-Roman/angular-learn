@@ -3,9 +3,14 @@
         <span class="spacer"></span>
         <div>Angular Application</div>
         <span class="spacer"></span>
-        <button mat-icon-button  (click)="click()">
-            <mat-icon *ngIf="isAuthenticated">menu</mat-icon>
-            <mat-icon *ngIf="!isAuthenticated">login</mat-icon>
-        </button>
+        <div>
+            <button mat-icon-button>
+                <ng-content select="[cart]" />
+            </button>
+            <button mat-icon-button  (click)="click()">
+                <mat-icon *ngIf="isAuthenticated">menu</mat-icon>
+                <mat-icon *ngIf="!isAuthenticated">login</mat-icon>
+            </button>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>

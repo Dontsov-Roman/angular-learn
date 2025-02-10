@@ -6,6 +6,7 @@ import { LayoutModule } from './layout/layout.module';
 import { SnackModule } from './snack/snack.module';
 import { ProductsModule } from './products/products.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { CartModule } from './cart/cart.module';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     RouterOutlet,
     SnackModule,
     UserProfileModule,
+    CartModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

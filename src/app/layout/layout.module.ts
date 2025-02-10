@@ -33,7 +33,6 @@ import { UserProfileModule } from '../user-profile/user-profile.module';
   providers: [
     SideNavService,
     Dialog,
-    DrawerMenuComponent,
   ]
 })
 export class LayoutModule { }

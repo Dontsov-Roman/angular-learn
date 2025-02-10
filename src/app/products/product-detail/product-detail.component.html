@@ -7,7 +7,21 @@
                 <i>{{ item.category }}</i>
             </p>
         </div>
-        <p><b>{{ item.price | currency }}</b></p>
+        <p>
+            <b>{{ item.price | currency }}</b>
+            <button mat-icon-button (click)="addToCart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+            <button
+                *ngIf="alreadyAdded()"
+                [matBadge]="countInCart()"
+                mat-icon-button
+                matBadgeSize="small"
+                (click)="removeFromCart($event)"
+            >
+                <mat-icon>remove_shopping_cart</mat-icon>
+            </button>
+        </p>
         <p>{{ item.description }}</p>
     </section>
     <a mat-raised-button [routerLink]="['']">Back</a>
