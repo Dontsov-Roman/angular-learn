@@ -1,1 +1,9 @@
-<div><mat-icon [matBadge]="count()">shopping_cart</mat-icon></div>
+<div>
+    <mat-icon
+        [matBadgeHidden]="!count()"
+        [matBadge]="count()"
+        aria-hidden="false"
+    >
+        shopping_cart
+    </mat-icon>
+</div>
